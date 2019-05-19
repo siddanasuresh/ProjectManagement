@@ -1,0 +1,66 @@
+<form class="form-inline">
+    <div class="form-group col-sm-5">
+        <div>
+            <input type="text" class="form-control" style="width: 100%" id="projectSearch" name="projectSearch" placeholder="Search"
+                [(ngModel)]="projectSearch">
+        </div>
+    </div>
+    <div class="form-group col-sm-1">
+        <label class="control-label" style="width: 100%">Sort:</label>
+    </div>
+    <div class="form-group col-sm-5" style="margin-bottom: 10px;">
+        <a class='btn btn-info btn-md' (click)="sortProject('startDate')">Start Date</a>&nbsp;
+        <a class='btn btn-info btn-md' (click)="sortProject('endDate')">End Date</a>&nbsp;
+        <a class='btn btn-info btn-md' (click)="sortProject('priority')">Priority</a>&nbsp;
+        <a class='btn btn-info btn-md' (click)="sortProject('completedTasks')">Completed</a>&nbsp;
+    </div>
+</form>
+<div style="height:100px;"></div>
+<div class="list-group" style="width: 70%; align-content: center" *ngFor="let project of projectViews | 
+    projectsSearch: projectSearch | projectsSort:path:order">
+    <a href="#" class="list-group-item">
+        <div class="form-horizontal list-group-item-text">
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <span>Project Name:</span> &nbsp;
+                    <strong> {{project.projectName}}</strong>
+                </div>
+                <div class="col-sm-4">
+                    <span>Priority:</span> &nbsp;
+                    <strong>{{project.priority}}</strong>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <span>Start Date:</span> &nbsp;
+                    <strong> {{project.startDate|date :'dd/MM/yyyy'}}</strong>
+                </div>
+                <div class="col-sm-4">
+                    <span>End Date:</span> &nbsp;
+                    <strong>{{project.endDate|date :'dd/MM/yyyy'}}</strong>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <span>No Of Tasks:</span> &nbsp;
+                    <strong>{{project.numberOfTasks}}</strong>
+                </div>
+                <div class="col-sm-4">
+                    <span>Completed:</span> &nbsp;
+                    <strong>{{project.completedTasks}}</strong>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <a class='btn btn-info btn-xs' (click)="onSelectProject(project.projectId)">
+                        <span class="glyphicon glyphicon-edit"></span>Edit</a>
+                </div>
+                <div class="col-sm-4">
+                    <a class="btn btn-danger btn-xs" (click)="onDeleteProject(project.projectId)">
+                        <span class="glyphicon glyphicon-remove"></span>Suspend</a>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

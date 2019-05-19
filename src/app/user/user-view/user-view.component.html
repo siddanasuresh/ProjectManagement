@@ -1,0 +1,46 @@
+<form class="form-inline">
+    <div class="form-group col-sm-5">
+        <div>
+            <input type="text" class="form-control" style="width: 100%" id="userSearch" name="userSearch" placeholder="Search" [(ngModel)]="userSearch">
+        </div>
+    </div>
+    <div class="form-group col-sm-1">
+        <label class="control-label" style="width: 100%">Sort:</label>
+    </div>
+    <div class="form-group col-sm-5" style="margin-bottom: 10px;">
+        <a class='btn btn-info btn-md' (click)="sortUser('firstName')">First Name</a>&nbsp;
+        <a class='btn btn-md' (click)="sortUser('lastName')">Last Name</a>&nbsp;
+        <a class='btn btn-info btn-md' (click)="sortUser('employeeId')">Employee Id</a>&nbsp;
+    </div>
+</form>
+<div style="height:100px;"></div>
+<div class="list-group" style="width: 70%; align-content: center" *ngFor="let user of users | 
+    usersSearch: userSearch | usersSort:path:order">
+    <a href="#" class="list-group-item">
+        <div class="form-horizontal list-group-item-text">
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <strong> {{user.firstName}}</strong>
+                </div>
+                <div class="col-sm-4">
+                    <a class='btn btn-info btn-xs' (click)="onSelectUser(user.userId)">
+                        <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <strong> {{user.lastName}}</strong>
+                </div>
+                <div class="col-sm-4">
+                    <a class="btn btn-xs" (click)="onDeleteUser(user.userId)">
+                        <span class="glyphicon glyphicon-remove"></span>Delete</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <strong>{{user.employeeId}}</strong>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
